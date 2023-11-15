@@ -1,9 +1,5 @@
 import fs from 'fs';
-import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import { validateUsername, validatePassword, validateEmail } from '../../validations.js';
-
-dotenv.config();
 
 const readData = () => {
     try {
@@ -31,7 +27,11 @@ const getUserByUsername = (req, res) => {
     const data = readData();
     const username = req.params.username;
     const user = data.users.find((user) => user.username === username);
-    res.json(user);
+    if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado." });
+    } else{
+        res.json(user);
+    };
 };
 
 const createUser = (req, res) => {
@@ -117,30 +117,11 @@ const deleteUser = (req, res) => {
     res.json({ message: "Usuario eliminado con éxito", user: deletedUser });
 };
 
-const generateAccessToken = (user) => {
-    const secretKey = process.env.SECRET_KEY;
-    const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
-    return token;
-}
-
-const loginUser = (req, res) => {
-    const db = JSON.parse(fs.readFileSync('db.json', 'utf8'));
-    const { username, password } = req.body;
-    const user = db.users.find((u) => u.username === username && u.password === password);
-    if (user) {
-        const token = generateAccessToken({ username: user.username });
-        res.status(200).json({ message:'Sesión Iniciada' });
-    } else {
-        res.status(401).json({ error: 'Username o Password incorrecto' });
-    }
-}
-
 export {
     getUsers,
     getUserByUsername,
     createUser,
     updateUser,
-    deleteUser,
-    loginUser
+    deleteUser
 };
 
