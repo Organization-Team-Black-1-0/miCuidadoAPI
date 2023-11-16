@@ -1,5 +1,5 @@
 {
-  "name": "reset-password",
+ "name": "reset-password",
   "version": "1.0.0",
   "description": "Un programa para resetear clacve de cualquier login via email",
   "main": "index.js",
