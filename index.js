@@ -1,6 +1,7 @@
+import 'dotenv/config'
 import express from 'express';
 import jwt from 'jsonwebtoken';
-
+import email from '../reset-password/email/email.js';
 const app = express();
 
 app.use(express.json())
