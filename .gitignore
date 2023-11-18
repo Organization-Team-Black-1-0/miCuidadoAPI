@@ -1,0 +1,3 @@
+.env             // para evitar exponer nuetras variables de entorno 
+node_modules/    // no es necesario cargar en github
+node_modules
