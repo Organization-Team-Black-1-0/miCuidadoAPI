@@ -2,13 +2,21 @@
   "name": "api-node.js-express-mondb",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "dev": "nodemon app.js",
     "start": "babel app/ -d dist/"
   },
-  "keywords": [],
+  "keywords": ["node.js",
+  "express",
+  "jwt",
+  "login",
+  "registration",
+  "authentication",
+  "authorization",
+  "mongodb",
+  "mongoose"],
   "author": "",
   "license": "ISC",
   "dependencies": {

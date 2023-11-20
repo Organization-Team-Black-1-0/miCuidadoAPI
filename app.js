@@ -18,9 +18,9 @@ app.get('/', (req, res) => {
     res.send('¡Bienvenidos a la Web: Mi cuidado Diario');
 });
 
-app.use(authenticateToken);
+//app.use(authenticateToken);
 
-app.use("/users", userRoutes);
+app.use("/users", userRoutes.js);
 
 app.use((req, res, next) => {
     res.status(404).json({ error: 'Ruta no encontrada' });

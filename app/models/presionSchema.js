@@ -14,5 +14,6 @@ const presionSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
+const Presion = mongoose.model('Presion', presionSchema);
 
 export default mongoose.model('Presion', presionSchema);
