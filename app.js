@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import userRoutes from './app/routes/userRoutes.js';
 import authRoutes from './app/routes/authRoutes.js';
+import bloodPressureRouter from './app/routes/bloodPressureRoutes.js';
 import dotenv from 'dotenv';
 
 const app = express();
@@ -21,6 +22,8 @@ app.get('/', (req, res) => {
 app.use('/users', userRoutes);
 
 app.use('/users', authRoutes);
+
+app.use('/bloodPressure', bloodPressureRouter);
 
 //Manejo de errores
 app.use((req, res, next) => {

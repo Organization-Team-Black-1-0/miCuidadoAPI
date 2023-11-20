@@ -43,8 +43,63 @@ function validateEmail(email) {
     };
 }
 
+const validateBloodPressure = (bloodPressure) => {
+    const { systolic, diastolic } = bloodPressure;
+    if (systolic <= 0 || diastolic <= 0) {
+        return {
+            isValid: false,
+            error: "Los valores de la presión arterial deben ser mayores a 0."
+        };
+    }
+    if (diastolic > systolic) {
+        return {
+            isValid: false,
+            error: "La presión diastólica no puede ser mayor que la presión sistólica."
+        };
+    }
+    return {
+        isValid: true
+    };
+}
+
+const validateDate = (date) => {
+    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    const isValidDate = dateRegex.test(date);
+
+    if (!isValidDate) {
+        return {
+            isValid: false,
+            error: "La fecha proporcionada no es válida."
+        };
+    }
+
+    return {
+        isValid: true
+    };
+};
+
+
+const validateTime = (time) => {
+    const timeRegex = /^\d{2}:\d{2}$/;
+    const isValidTime = timeRegex.test(time);
+
+    if (!isValidTime) {
+        return {
+            isValid: false,
+            error: "La hora proporcionada no es válida."
+        };
+    }
+
+    return {
+        isValid: true
+    };
+};
+
 export {
     validateUsername,
     validatePassword,
-    validateEmail
+    validateEmail,
+    validateBloodPressure,
+    validateDate,
+    validateTime
 };
