@@ -86,7 +86,18 @@ const validateTime = (time) => {
     if (!isValidTime) {
         return {
             isValid: false,
-            error: "La hora proporcionada no es válida."
+            error: "El formato de hora no es válido. Debe ser en el formato HH:MM."
+        };
+    }
+
+    const [hours, minutes] = time.split(':');
+    const parsedHours = parseInt(hours, 10);
+    const parsedMinutes = parseInt(minutes, 10);
+
+    if (parsedHours < 0 || parsedHours > 23 || parsedMinutes < 0 || parsedMinutes > 59) {
+        return {
+            isValid: false,
+            error: "La hora proporcionada no es válida. Asegúrate de ingresar una hora válida en el formato HH:MM."
         };
     }
 

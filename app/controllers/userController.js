@@ -1,123 +1,112 @@
 import fs from 'fs';
+import User from '../models/userSchema.js'; // Importa el modelo de usuario
 import { validateUsername, validatePassword, validateEmail } from '../../validations.js';
 
-const readData = () => {
+const getUsers = async (req, res) => {
     try {
-        const data = fs.readFileSync("./db.json");
-        return JSON.parse(data);
+        const users = await User.find(); // Usa el modelo de usuario para buscar usuarios
+        res.status(200).json(users);
     } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error.message });
     }
 };
 
-const writeData = (data) => {
+const getUserByUsername = async (req, res) => {
     try {
-        fs.writeFileSync("./db.json", JSON.stringify(data));
+        const username = req.params.username;
+        const user = await User.findOne({ username }); // Usa el modelo de usuario para buscar el usuario
+        if (user) {
+            res.status(200).json(user);
+        } else {
+            res.status(404).json({ message: 'Usuario no encontrado' });
+        }
     } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error.message });
     }
-};
+}; 
 
-const getUsers = (req, res) => {
-    const data = readData();
-    res.json(data.users);
-};
+const createUser = async (req, res) => {
+    try {
+        const { username, password, email } = req.body;
 
-const getUserByUsername = (req, res) => {
-    const data = readData();
-    const username = req.params.username;
-    const user = data.users.find((user) => user.username === username);
-    if (!user) {
-        return res.status(404).json({ error: "Usuario no encontrado." });
-    } else{
-        res.json(user);
-    };
-};
+        if (!username || !password || !email) { // Código Carla
+            return res.status(400).json({ error: "Faltan campos obligatorios del usuario." });
+        }
 
-const createUser = (req, res) => {
-    const data = readData();
-    const { username, password, email } = req.body;
+        const usernameValidation = validateUsername(username);
+        if (!usernameValidation.isValid) {
+            return res.status(400).json({ error: usernameValidation.error });
+        }
 
-    if (!username || !password || !email) {
-        return res.status(400).json({ error: "Faltan campos obligatorios del usuario." });
-    }
-
-    const usernameValidation = validateUsername(username);
-    if (!usernameValidation.isValid) {
-        return res.status(400).json({ error: usernameValidation.error });
-    }
-
-    const passwordValidation = validatePassword(password);
-    if (!passwordValidation.isValid) {
-        return res.status(400).json({ error: passwordValidation.error });
-    }
-
-    const emailValidation = validateEmail(email);
-    if (!emailValidation.isValid) {
-        return res.status(400).json({ error: emailValidation.error });
-    }
-
-    const newUser = {
-        id: data.users.length + 1,
-        username,
-        password,
-        email
-    };
-
-    data.users.push(newUser);
-    writeData(data);
-    res.json({ message: "Registro cargado con éxito", user: newUser });
-};
-
-const updateUser = (req, res) => {
-    const data = readData();
-    const username = req.params.username;
-    const { password, email } = req.body;
-
-    const user = data.users.find((user) => user.username === username);
-    if (!user) {
-        return res.status(404).json({ error: "Usuario no encontrado." });
-    }
-
-    if (!password && !email) {
-        return res.status(400).json({ error: "Se debe proporcionar al menos un campo para actualizar." });
-    } 
-
-    if (password) {
         const passwordValidation = validatePassword(password);
         if (!passwordValidation.isValid) {
             return res.status(400).json({ error: passwordValidation.error });
         }
-        user.password = password;
-    }
 
-    if (email) {
         const emailValidation = validateEmail(email);
         if (!emailValidation.isValid) {
             return res.status(400).json({ error: emailValidation.error });
         }
-        user.email = email;
-    }
 
-    writeData(data);
-    res.json({ message: "Usuario actualizado con éxito", user });
+        const newUser = new User({ username, password, email }); // Crea un nuevo usuario
+        await newUser.save(); // Guarda el usuario en la base de datos
+        res.status(201).json({ message: 'Usuario creado con éxito', user: newUser });
+        //console.log(req.body)
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+        //console.log(error)
+    }
 };
 
-const deleteUser = (req, res) => {
-    const data = readData();
-    const username = req.params.username;
+const updateUser = async (req, res) => {
+    try {
+        const username = req.params.username;
+        const { password, email } = req.body;
 
-    const index = data.users.findIndex((user) => user.username === username);
-    if (index === -1) {
-        return res.status(404).json({ error: "Usuario no encontrado." });
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(404).json({ error: "Usuario no encontrado." });
+        }
+
+        if (password) {
+            const passwordValidation = validatePassword(password);
+            if (!passwordValidation.isValid) {
+                return res.status(400).json({ error: passwordValidation.error });
+            }
+            user.password = password;
+        }
+
+        if (email) {
+            const emailValidation = validateEmail(email);
+            if (!emailValidation.isValid) {
+                return res.status(400).json({ error: emailValidation.error });
+            }
+            user.email = email;
+        }
+
+        await user.save();
+        res.json({ message: "Usuario actualizado con éxito", user });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-
-    const deletedUser = data.users.splice(index, 1)[0];
-    writeData(data);
-    res.json({ message: "Usuario eliminado con éxito", user: deletedUser });
 };
 
-export {
+const deleteUser = async (req, res) => {
+    try {
+        const username = req.params.username;
+
+        const user = await User.findOneAndDelete({ username });
+        if (!user) {
+            return res.status(404).json({ error: "Usuario no encontrado." });
+        }
+
+        res.json({ message: "Usuario eliminado con éxito", user });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const userController = {
     getUsers,
     getUserByUsername,
     createUser,
@@ -125,3 +114,4 @@ export {
     deleteUser
 };
 
+export default userController;

@@ -38,7 +38,7 @@ const createBloodPressure = (req, res) => {
     const data = readData();
     const { username, systolic, diastolic, date, time } = req.body;
 
-    if (!username || !systolic || !diastolic || !date || !time) {
+    if (!systolic || !diastolic || !date || !time) {
         return res.status(400).json({ error: "Faltan campos obligatorios del registro de presion arterial." });
     }
 
@@ -67,11 +67,12 @@ const createBloodPressure = (req, res) => {
     }
 
     const newBlood = {
-        id: data.blood.length + 1,
+        id_blood: data.blood.length + 1,
+        username: username,
         systolic: systolic,
         diastolic: diastolic,
         date: date,
-        Time: time
+        time: time
     };
 
     data.blood.push(newBlood);
