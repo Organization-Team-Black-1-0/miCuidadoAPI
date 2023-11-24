@@ -1,0 +1,73 @@
+<main class="main">
+    <section header>
+        <header class="header-landing">
+          <div class="wrap-logo">
+            <img src="./utilities/img/logo.png" alt="" class="logo-header">
+          </div>
+          <div id="root">
+            <nav id="main-nav">
+              <ul class="menu-principal">
+                <li><img src="./utilities/img/day-and-night-256.png" alt="icono-dia-noche" class="icono-header"></li>
+                <li class="menu-item"><a href="/" onclick="route()">Home</a> </li>
+                <li class="menu-item"><a href="/register" onclick="route()">Registro</a> </li>
+                <li class="menu-item"><a href="/login" onclick="route()">Login</a></li>
+                <li class="menu-item"><a href="/checkList" onclick="route()">CheckList</a></li>
+                <li class="menu-item"><a href="mailto:administrador-mcd@proton.me?subject=IPQRs%20(Inquietudes%2C%20Peticiones%2C%20Quejas%20y%20Reclamos)">Contacto</a>
+              </ul>
+            </nav>
+          </div>
+        </header>
+    </section>
+    <section id="login-section">
+        <picture class="main__picture">
+            <img src="./utilities/img/login.png" class="main__img" alt="persona-cuidadora">
+        </picture>
+        <div class="wrap-home-section">
+            <h1><strong> Mi Cuidado Diario</strong></h1>
+            <p>¡Tu bienestar, nuestra prioridad diaria!.</p>
+            <form action="(/, getUsers)" method="get">
+                <div class="form-group">
+                    <label for="username">Nombre de usuario:</label>
+                    <input class="Inputs-L" 
+                        type="text" 
+                        id="username"
+                        name="username" 
+                        placeholder="Ingresa un Usuario"  
+                        maxlength="30"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input class="Inputs-L"
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Ingresa una contraseña"
+                        maxlength="10"
+                        required>
+                </div>
+                <div class="form-group">
+                        <button class="button" 
+                        id="register"  
+                        type="submit" value="Entrar">Iniciar Sesión</button>
+                </div>
+            </form>
+            <h3> ¿No tienes cuenta? Registrate  <a href="/register" onclick="route()">Aquí</a></h3>
+            <h3> ¿Olvidaste la contraseña? </h3>
+            <button class="button" 
+                        id="recuperar"  
+                        type="submit" value="Entrar">Recuperar contraseña</button>
+        </div>	
+    </section>
+</main>
+    <script src="main.js"></script> 
+<footer class="footer-section">
+    <div class="footer-creds">
+      <h3>©Copyright 2023 - Team Black 1.</h3>
+      <div class="marquee">
+        <div class="wrapper">
+          <div><h3>🚀 Proyecto educativo para las  Olimpiadas COPA 2023 🚀</h3></div>
+        </div>
+      </div>    
+    </div>
+</footer> 

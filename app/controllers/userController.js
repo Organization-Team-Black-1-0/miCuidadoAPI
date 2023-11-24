@@ -1,5 +1,4 @@
-import fs from 'fs';
-import User from '../models/userSchema.js'; // Importa el modelo de usuario
+import User from '../models/userSchema.js';
 import { validateUsername, validatePassword, validateEmail } from '../../validations.js';
 
 const getUsers = async (req, res) => {
@@ -29,7 +28,7 @@ const createUser = async (req, res) => {
     try {
         const { username, password, email } = req.body;
 
-        if (!username || !password || !email) { // Código Carla
+        if (!username || !password || !email) {
             return res.status(400).json({ error: "Faltan campos obligatorios del usuario." });
         }
 
@@ -106,12 +105,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-const userController = {
-    getUsers,
-    getUserByUsername,
-    createUser,
-    updateUser,
-    deleteUser
-};
-
-export default userController;
+export { getUsers, getUserByUsername, createUser, updateUser, deleteUser };
