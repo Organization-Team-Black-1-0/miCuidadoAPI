@@ -1,0 +1,304 @@
+/*{
+  outline: 1px solid limegreen !important;
+}*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+/** Estilos Generales **/
+
+.containerPages{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+p {
+  color: #fff;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 30px;
+  text-align: center;
+  font-family: "Itim", cursive;
+}
+
+a {
+  text-decoration: none;
+  color: #0483ba;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.button:hover {
+  border: inset;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.button {
+  border-radius: 55px;
+  background: #0b6efe;
+  border: none;
+  width: 9rem;
+  height: 3rem;
+  margin: 1rem;
+  color: rgb(255, 255, 255);
+  opacity: 1;
+  border: outset;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+}
+
+.Inputs-L {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 15px;
+  width: 300px;
+  padding: 15px;
+  border-color: #97d9e1;
+  margin-top: 1%;
+}
+
+.Inputs-L::placeholder {
+  text-align: center;
+  color: #005fb3;
+}
+
+h1 {
+  color: #fff;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 40px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  padding: 50px;
+  }
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  opacity: 0.9;
+  color: #fff;
+}
+
+h3 {
+  font-size: 20px;
+  /*font-family: 'Itim', cursive;*/
+}
+
+/** Header **/
+
+.header-landing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  height: 70px;
+  width: 100%;
+  position: fixed;
+  top: 0%;
+  background: #f2f2f2;
+  text-align: center;
+}
+
+.logo-header {
+  max-width: 100px;
+  height: 70px;
+  width: 70px;
+}
+
+.icono-header {
+  max-width: 50px;
+  height: 50px;
+  width: 50px;
+  opacity: 0.7;
+}
+
+.menu-principal {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+li.menu-item {
+  padding: 16px;
+}
+
+li.menu-item:hover,
+li.menu-item a.active,
+a.button:hover {
+  background-color: #a2c6f0;
+  border-radius: 30px;
+  transition: background-color, 0, 3s;
+}
+
+.main {
+  background-image: url("/utilities/img/landing1.png");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: rgba(106, 141, 163, 0.7);
+  background-blend-mode: multiply;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__picture {
+  max-width: 400px;
+  margin-top: 200px;
+}
+
+.main__img {
+  display: flex;
+  width: 500px;
+  padding: 20px;
+  align-content: center;
+  border-radius: 10%;
+}
+
+/*Home Section */
+
+#home-section {
+  display: flex;
+  justify-content: center;
+}
+
+.wrap-home-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  color: #fff;
+  padding: 60px;
+  margin-top: 50px;
+}
+
+/*Register Section*/
+
+#register-section {
+  display: flex;
+  justify-content: center;
+  max-height: max-content;
+}
+
+.wrap-login-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  color: #fff;
+  padding: 100px;
+}
+
+.form-group {
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 10px;
+  text-align: center;
+  font-family: "Itim", cursive;
+}
+
+/* Login Section*/
+
+#login-section {
+  display: flex;
+  justify-content: center;
+  max-height: max-content;
+}
+
+/* CheckList Section */
+
+#checkList-section {
+  margin-top: 60px;
+}
+
+.wrap-home-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 800px;
+  color: #fff;
+  padding: 60px;
+  margin-top: 50px;
+}
+
+
+.wrap-checkList-section {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  color: #fff;
+ }
+
+.item-checkList-section {
+  padding: 16px;
+}
+
+.item-checkList-section img {
+  width: 300px;
+  height: 225px;
+}
+
+/** Footer**/
+
+
+.footer-section {
+  background: #f2f2f2;
+  padding: 20px;
+  color: #0483ba;
+}
+
+.footer-creds {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.marquee {
+  width: 100%;
+  overflow: hidden;
+}
+
+.wrapper {
+ display: flex;
+ animation: slide 40s  infinite;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+
+
+@media screen and (max-width: 800px) {
+  #home-section {
+    flex-direction: row;
+    padding: 10%;
+  }
+
+  .main__picture {
+    display: none;
+  }
+}
