@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Tu Cuidado Diario CheckList</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,7 +14,7 @@
           <div class="wrap-logo">
             <img src="./utilities/img/logo.png" alt="" class="logo-header">
           </div>
-          <div id="root">
+          <!--div id="root"-->
             <nav id="main-nav">
               <ul class="menu-principal">
                 <li><img src="./utilities/img/day-and-night-256.png" alt="icono-dia-noche" class="icono-header"></li>
@@ -25,10 +25,10 @@
                 <li class="menu-item"><a href="mailto:administrador-mcd@proton.me?subject=IPQRs%20(Inquietudes%2C%20Peticiones%2C%20Quejas%20y%20Reclamos)">Contacto</a>
               </ul>
             </nav>
-          </div>
+          <!--/div-->
         </header>
         <main class="main">
-          <section header>
+          <!--section header-->
               <header class="header-landing">
                 <div class="wrap-logo">
                   <img src="./utilities/img/logo.png" alt="" class="logo-header">
@@ -45,8 +45,8 @@
                     </ul>
                   </nav>
                 </div>
-              </header-->
-          </section>
+              </header>
+          <!--/section-->
           <section id="checkList-section">
               <h1><strong> Mi Cuidado Diario</strong></h1>
               <h2>¡Tu bienestar, nuestra prioridad diaria!</h2>
@@ -55,16 +55,18 @@
                     <form name="inputFormPresion" onsubmit="return verifyinputFormPresion()">
                       <div class="form-group">
                         <p>Registro de presión arterial</p>
-                        <h2>Sistólica</h2>                      
-                        <input class="Inputs-L 
+                        <label for="presion-sistolica">Presión Sistólica:</label>
+                        <input class="Inputs" 
                         type= "number"
                         id="registroPresionS" 
                         name="Presion arterial Sistolica" 
                         min="50" max="400"
                         placeholder="Escribe un número">
                         <small>mmHg</small>
-                        <h2>Diastólica</h2>
-                        <input class="Inputs-L 
+                      </div>
+                      <div class="form-group">
+                        <label for="presion-diastolica">Presión Diastólica:</label>
+                        <input class="Inputs" 
                         type="number"
                         id="registroPresionD"
                         name="Presion arterial Diastolica" 
@@ -73,11 +75,31 @@
                         <small>mmHg</small>
                       </div>
                       <div class="form-group">
+                        <label for="fecha">Fecha:</label>
+                        <input class="Inputs"
+                        type="date" 
+                        id="fecha"
+                        placeholder="dd/mm/aa"
+                        required>
+                      </div>
+                      <div class="form-group">
+                        <label for="hora">Hora:</label>
+                        <input class="Inputs"
+                        type="time"
+                        id="hora" 
+                        placeholder="Hora"
+                        required>
+                      </div>
+                    </div>
+                      <div class="form-group">
                         <button class="button" type="submit">Enviar</button>
                       </div>
                       <div id="alertadeRegistroP1"></div>
                     </form>
                   </form>
+              </div>
+              <div>
+                <p> Una característica destacada de Mi Cuidado Diario es el checklist, que te permite marcar las actividades que deben llevarse a cabo durante el día. Algunos ejemplos incluyen tomar la presión por la mañana y por la tarde, evaluar el estado de ánimo y la salud física del adulto mayor, así como realizar actividades de higiene y comodidad para asegurar su bienestar y tranquilidad.</p>
               </div>
               <div class="wrap-checkList-section">
                   <a href="" class="item-checkList-section"><img src="utilities/img/higiene.png" alt="Riesgo Fisico"><p>Higiene y Confort</p></img></a>
