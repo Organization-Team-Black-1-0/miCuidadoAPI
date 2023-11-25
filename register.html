@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tu Cuidado Diario Registro</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">   
+  </head>
+  <body>
+    <header class="header-landing">
+      <div class="wrap-logo">
+        <img src="./utilities/img/logo.png" alt="" class="logo-header">
+      </div>
+      <div id="root">
+        <nav id="main-nav">
+          <ul class="menu-principal">
+            <li><img src="./utilities/img/day-and-night-256.png" alt="icono-dia-noche" class="icono-header"></li>
+            <li class="menu-item"><a href="/" onclick="route()">Home</a> </li>
+            <li class="menu-item"><a href="/register" onclick="route()">Registro</a> </li>
+            <li class="menu-item"><a href="/login" onclick="route()">Login</a></li>
+            <!--li class="menu-item"><a href="/checkList" onclick="route()">CheckList</a></li-->
+            <li class="menu-item"><a href="mailto:administrador-mcd@proton.me?subject=IPQRs%20(Inquietudes%2C%20Peticiones%2C%20Quejas%20y%20Reclamos)">Contacto</a>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main class="main">
+      <section id="register-section">
+        <picture class="main__picture">
+          <img src="/utilities/img/adultoMayor.jpg" class="main__img" alt="persona-cuidadora">
+        </picture>
+        <div class="wrap-home-section">
+          <h1><strong> Mi Cuidado Diario</strong></h1>
+          <p>¡Tu bienestar, nuestra prioridad diaria!.</p>
+          <form id="register-form" action="/users" method="post">
+            <div class="form-group">
+              <label for="username">Nombre de usuario:</label>
+              <input class="Inputs-L" type="text" 
+                id="username"
+                name="username" 
+                placeholder="Ingresa un Usuario" 
+                autocomplete="off"  
+                maxlength="30" required>
+            </div>
+            <div class="form-group">
+              <label for="password">Contraseña:</label>
+              <input  class="Inputs-L" 
+              type="password" 
+              id="password"
+              name="password" 
+              placeholder="Ingresa tu contraseña"  
+              autocomplete="off" 
+              maxlength="30" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico:</label>
+              <input class="Inputs-L"
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Ingresa tu correo"
+                autocomplete="off"
+                maxlength="30" required>
+            </div>
+            <div class="form-group">
+              <button class="button" 
+                id="register" 
+                type="submit" 
+                value="Registrarse">Regístrarse
+              </button>
+            </div>
+          </form>
+          <h3> ¿Ya tienes cuenta? Ingresa<a href="/login" onclick="route()">Aquí</a> 
+          </h3>
+        </div>	
+      </section>
+    </main>
+    <!--script src= "./script.js"></script--> 
+    <footer class="footer-section">
+      <div class="footer-creds">
+        <h3>©Copyright 2023 - Team Black 1.</h3>
+        <div class="marquee">
+          <div class="wrapper">
+            <div><h3>🚀 Proyecto educativo para las  Olimpiadas COPA 2023 🚀</h3></div>
+          </div>
+        </div>    
+      </div>
+    </footer> 
+  </body>
+</html>   
