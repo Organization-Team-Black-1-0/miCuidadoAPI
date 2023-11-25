@@ -47,7 +47,7 @@ const createUser = async (req, res) => {
             return res.status(400).json({ error: emailValidation.error });
         }
 
-        const newUser = new User({ username, password, email }); // Crea un nuevo usuario
+        const newUser = new UserS({ username, password, email }); // Crea un nuevo usuario
         await newUser.save(); // Guarda el usuario en la base de datos
         res.status(201).json({ message: 'Usuario creado con éxito', user: newUser });
         //console.log(req.body)
@@ -83,7 +83,7 @@ const updateUser = async (req, res) => {
             user.email = email;
         }
 
-        await user.save();
+        await User.save();
         res.json({ message: "Usuario actualizado con éxito", user });
     } catch (error) {
         res.status(500).json({ message: error.message });

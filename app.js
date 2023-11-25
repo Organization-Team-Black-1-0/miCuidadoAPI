@@ -5,8 +5,10 @@ import userRoutes from './app/routes/userRoutes.js';
 import authRoutes from './app/routes/authRoutes.js';
 import bloodPressureRouter from './app/routes/bloodPressureRoutes.js';
 import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import cors from "cors";//Asiul
-//import { authenticateToken } from './app/middleware/authenticateToken.js'; //Asiul
 import { connectDB } from './config/database.js'; // Importa connectDB desde database.js
 
 
@@ -17,10 +19,16 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(express.urlencoded({ extended: true })); - Asiul
-//app.use(express.urlencoded ({ extended: false })) - Eliecer
 app.set('view engine', 'ejs');
+
+// Configura el middleware de sesión
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
 connectDB(); // Conecta a la base de datos
 
@@ -51,15 +59,3 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`La aplicación está funcionando en http://localhost:${port}`);
 });
-
-
-/*
-// Aquí se define un objeto con un usuario. Nótese que aquí debería estar conectada la base de datos.
-let user = {
-    id: "yellow",
-    email: "cischass@gmail.com",
-    password: "adsdasdfasdfasdfasdf"
-}
-// El mensaje que define la constante JWT_SECRET puede ser cualquier cadena de texto, ej.: "tucolorfavorito".
-// Esta constante reemplaza el uso de la librería bcrypt, aunque es más recomendable usar esta última. Por esto mismo,
-*/

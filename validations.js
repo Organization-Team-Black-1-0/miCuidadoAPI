@@ -63,7 +63,7 @@ const validateBloodPressure = (bloodPressure) => {
 }
 
 const validateDate = (date) => {
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const isValidDate = dateRegex.test(date);
 
     if (!isValidDate) {

@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 //import { authenticateToken } from './app/middleware/authenticateToken.js'; Asiul
 import User from '../models/userSchema.js'; // Importa el modelo de usuario
 import nodemailer from 'nodemailer';
@@ -12,7 +14,8 @@ const generateAccessToken = (user) => {
     const secretKey = process.env.SECRET_KEY;
     const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
     return token;
-}
+};
+
 const loginUser = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -22,9 +25,10 @@ const loginUser = async (req, res) => {
             console.log(result);
             if (result) {
                 const token = generateAccessToken({ username: user.username });
+                req.session.username = user.username; // Almacena el username en la sesión
                 // Almacenar el token en una cookie
                 res.cookie('token', token, { httpOnly: true, maxAge: 3600000 });
-
+                console.log(token);
                 res.status(200).json({ message:'Sesión Iniciada', username: user.username }); // Envía el token al cliente
             } else {
                 res.status(401).json({ error: 'Username o Password incorrecto' });
@@ -43,6 +47,38 @@ const logoutUser = (req, res) => {
 
     res.status(200).json({ message: 'Sesión Cerrada' });
 }; 
+
+const getUserFromToken = (req, res, next) => {
+    // Obtener el token de la cookie o de la cabecera de la solicitud
+    const token = req.cookies.token || req.headers.authorization;
+
+    if (!token) {
+        return res.status(401).json({ error: 'Token no proporcionado' });
+    }
+
+    try {
+        // Verificar y decodificar el token
+        const decodedToken = jwt.verify(token, 'clave-secreta-del-token');
+
+        // Obtener la información del usuario desde el token decodificado
+        const username = decodedToken.username;
+
+        // Hacer lo que necesites con el username, por ejemplo, buscar el usuario en la base de datos
+        const user = User.findByUsername(username);
+
+        if (!user) {
+            return res.status(401).json({ error: 'Usuario no encontrado' });
+        }
+
+        // Añadir el usuario al objeto de solicitud para que esté disponible en otros controladores
+        req.user = user;
+
+        // Llamar a next() para pasar al siguiente controlador
+        next();
+    } catch (error) {
+        return res.status(401).json({ error: 'Token inválido' });
+    }
+};
 
 const sendMail = async (req, res) => {
     // función asíncrona en la que se agregan los datos de acceso y credenciales del dominio desde el cual 
@@ -165,7 +201,10 @@ const resetPassword = async (req, res) => {
 export {
     loginUser,
     logoutUser,
+    getUserFromToken,
     forgotPassword,
     getResetPasswordByIdToken,
     resetPassword
 };
+
+

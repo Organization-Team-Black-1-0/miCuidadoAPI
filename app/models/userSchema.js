@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
         index: { unique: true },
     },
 })
+
 userSchema.pre("save", async function(next) {
     const user = this;
 
@@ -45,6 +46,6 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
     }
 };
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 export default User;
