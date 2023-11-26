@@ -9,6 +9,7 @@ const routes = {
     "/": "/pages/home.html",
     "/register": "/pages/register.html",
     "/login": "/pages/login.html",
+    "/recover": "/pages/recover.html",
     "/checkList": "/pages/checkList.html",
     404: "/pages/404.html"
 };

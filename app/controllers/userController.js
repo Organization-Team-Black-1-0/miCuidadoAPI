@@ -47,7 +47,7 @@ const createUser = async (req, res) => {
             return res.status(400).json({ error: emailValidation.error });
         }
 
-        const newUser = new UserS({ username, password, email }); // Crea un nuevo usuario
+        const newUser = new User({ username, password, email }); // Crea un nuevo usuario
         await newUser.save(); // Guarda el usuario en la base de datos
         res.status(201).json({ message: 'Usuario creado con éxito', user: newUser });
         //console.log(req.body)

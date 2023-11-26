@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import User from './userSchema.js';
 
 const bloodPressureSchema = new mongoose.Schema({
     systolic: {
@@ -10,19 +9,37 @@ const bloodPressureSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    /*date: {
+        type: Date,
+        required: true,
+    },*/
     date: {
         type: Date,
         required: true,
+        get: function (value) {
+            // Obtener la fecha en formato "dd/mm/aaaa"
+            if (value) {
+                const options = { day: "2-digit", month: "2-digit", year: "numeric" };
+                return value.toLocaleDateString("es-ES", options);
+            }
+            return value;
+        },
+        set: function (value) {
+            // Convertir la fecha en formato "dd/mm/aaaa" a un objeto Date
+            if (typeof value === 'string') {
+                const parts = value.split('/');
+                const day = parseInt(parts[0], 10);
+                const month = parseInt(parts[1], 10) - 1;
+                const year = parseInt(parts[2], 10);
+                return new Date(year, month, day);
+            }
+            return value;
+        },
     },
     time: {
         type: String,
         required: true,
     },
-    /*user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },*/
     user: {
         type: String,
         required: true
