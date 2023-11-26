@@ -1,14 +1,14 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import userRoutes from './app/routes/userRoutes.js';
-import authRoutes from './app/routes/authRoutes.js';
+import usersRouter from './app/routes/userRoutes.js';
+import authRouter from './app/routes/authRoutes.js';
 import bloodPressureRouter from './app/routes/bloodPressureRoutes.js';
+//import checkRouter from './app/routes/checkListRoutes.js';
 import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
 import session from 'express-session';
 import cookieParser from 'cookie-parser';
-import cors from "cors";//Asiul
+import cors from "cors";
 import { connectDB } from './config/database.js'; // Importa connectDB desde database.js
 
 
@@ -39,11 +39,47 @@ app.get('/', (req, res) => {
     res.sendFile(filePath);
 });
 
-app.use('/users', userRoutes);
+app.use('/users', usersRouter);
 
-app.use('/users', authRoutes);
+app.get("/loginUser/getUserByUsername", (req, res) => {
+    const filePath = path.join(__dirname, "./public/pages/login.html");
+    res.send(req.body);
+        
+});
+
+app.use('/users', authRouter);
+
+// Save the new user to the database
+// userService.createUser(createUser).then(() => {
+//     // User created successfully
+//     res.status(201).json({ message: "Usuario creado exitosamente" });
+// }).catch(err => {
+//     // Error creating the user
+//     res.status(500).json({ error: err.message });
+// });
 
 app.use('/bloodPressure', bloodPressureRouter);
+
+//app.post("/createUser", (req, res) => {
+    //const filePath = path.join(__dirname, "./public/home.html");
+    //const filePath = path.join(__dirname, "./public/pages/register.html");
+    //res.sendFile(req.body);
+//});
+
+app.post("/createUser", (req, res) => {
+    // Process the request body to create a new user
+    const createUser = {
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password
+    }
+});
+
+//enlace para frontend
+app.post("/getUsers/loginUser", (req, res) => {
+    const filePath = path.join(__dirname, "./public/pages/login.html");
+    res.send(req.body);
+});
 
 //Manejo de errores
 app.use((req, res, next) => {
